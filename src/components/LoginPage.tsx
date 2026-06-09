@@ -19,49 +19,22 @@ export default function LoginPage() {
     const navigate = useNavigate();
 
 
-
     const login = async () => {
-
-
-
         try {
-
             setLoading(true);
             setError("");
 
-
-            navigate("/dashboard");
-
-            // const response = await api.post(
-            //     "/login",
-            //     {
-            //         email,
-            //         password,
-            //     }
-            // );
-
-            // console.log(response.data);
-
-            // localStorage.setItem(
-            //     "token",
-            //     response.data.token
-            // );
-
-            // navigate("/dashboard");
-
-        } catch (err: any) {
-
-            setError(
-                err?.response?.data?.message ||
-                "Login Failed"
-            );
-
+            if (email === "admin" && password === "admin") {
+                localStorage.setItem("token", "dummy-admin-token");
+                navigate("/dashboard");
+            } else {
+                setError("Invalid Email or Password");
+            }
+        } catch (err) {
+            setError("Login Failed");
         } finally {
-
             setLoading(false);
-
         }
-
     };
 
     return (
@@ -128,13 +101,13 @@ export default function LoginPage() {
             </div>
 
             {/* RIGHT PANEL */}
-            
+
             <div className="flex items-center justify-center bg-slate-50 px-10">
 
                 <div className="w-full max-w-md rounded-[32px] bg-white p-10 shadow-2xl">
-                 
+
                     <h2 className="text-3xl font-bold text-slate-900">
-                        Welcome Back 
+                        Welcome Back
                     </h2>
 
                     <p className="mt-3 text-slate-500">
@@ -160,10 +133,10 @@ export default function LoginPage() {
                             <input
                                 type="email"
                                 value={email}
+                                placeholder="admin"
                                 onChange={(e) =>
                                     setEmail(e.target.value)
                                 }
-                                placeholder="admin@example.com"
                                 className="
                             w-full
                             rounded-2xl
