@@ -19,23 +19,26 @@ export default function LoginPage() {
     const navigate = useNavigate();
 
 
-    const login = async () => {
-        try {
-            setLoading(true);
-            setError("");
+const login = async () => {
+    try {
+        setLoading(true);
+        setError("");
 
-            if (email === "admin" && password === "admin" || password === "Admin") {
-                localStorage.setItem("token", "dummy-admin-token");
-                navigate("/dashboard");
-            } else {
-                setError("Invalid Email or Password");
-            }
-        } catch (err) {
-            setError("Login Failed");
-        } finally {
-            setLoading(false);
+        if (
+            email.toLowerCase() === "admin" &&
+            password.toLowerCase() === "admin"
+        ) {
+            localStorage.setItem("token", "dummy-admin-token");
+            navigate("/dashboard");
+        } else {
+            setError("Invalid Email or Password");
         }
-    };
+    } catch (err) {
+        setError("Login Failed");
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
 
